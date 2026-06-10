@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Antonio DeVore — Coming Soon</title>
+  <meta name="description" content="Antonio DeVore's personal website is coming soon. Play a bright orange mini game while you wait." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['ui-rounded', 'Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            orangePop: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              900: '#7c2d12'
+            },
+            ink: '#172033'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --orange: #f97316;
+      --amber: #fbbf24;
+      --cream: #fff7ed;
+      --ink: #172033;
+      --sunset: #ff7a18;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100svh;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.9), transparent 24rem),
+        radial-gradient(circle at 88% 6%, rgba(251, 191, 36, 0.55), transparent 20rem),
+        linear-gradient(135deg, #fff7ed 0%, #ffedd5 34%, #fdba74 100%);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    .sun-grid {
+      background-image:
+        linear-gradient(rgba(255, 122, 24, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 122, 24, 0.12) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
+
+    .floaty {
+      animation: floaty 5s ease-in-out infinite;
+    }
+
+    .floaty-delay {
+      animation: floaty 5.8s ease-in-out infinite;
+      animation-delay: -1.8s;
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    .shine {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shine::after {
+      content: "";
+      position: absolute;
+      inset: -120% auto auto -40%;
+      width: 40%;
+      height: 300%;
+      transform: rotate(25deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      animation: shine 4.5s ease-in-out infinite;
+    }
+
+    @keyframes shine {
+      0%, 55% { left: -55%; }
+      85%, 100% { left: 125%; }
+    }
+
+    .game-canvas {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      max-height: 68svh;
+      border-radius: 1.5rem;
+      touch-action: none;
+      background: #fff7ed;
+      display: block;
+    }
+
+    .control-button {
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .control-button:active {
+      transform: translateY(2px) scale(0.98);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased">
+  <div class="sun-grid pointer-events-none fixed inset-0 z-0 opacity-70"></div>
+
+  <header class="relative z-10">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8" aria-label="Main navigation">
+      <a href="#top" class="group flex items-center gap-3 rounded-full focus:outline-none focus:ring-4 focus:ring-orange-300">
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-orange-500 text-2xl shadow-lg shadow-orange-500/30 transition group-hover:rotate-6">
+          🚀
+        </span>
+        <span>
+          <span class="block text-base font-black tracking-tight text-ink sm:text-lg">Antonio DeVore</span>
+          <span class="block text-xs font-bold uppercase tracking-[0.22em] text-orange-700">Coming Soon</span>
+        </span>
+      </a>
+
+      <div class="hidden items-center gap-2 rounded-full border border-orange-200 bg-white/70 p-1 shadow-sm backdrop-blur md:flex">
+        <a href="#game" class="rounded-full px-4 py-3 text-sm font-extrabold text-orange-900 transition hover:bg-orange-100 focus:outline-none focus:ring-4 focus:ring-orange-300">Play Game</a>
+        <a href="#about" class="rounded-full px-4 py-3 text-sm font-extrabold text-orange-900 transition hover:bg-orange-100 focus:outline-none focus:ring-4 focus:ring-orange-300">What’s Coming</a>
+      </div>
+
+      <a href="#game" class="shine rounded-full bg-ink px-5 py-3 text-sm font-black text-white shadow-xl shadow-orange-700/20 transition hover:-translate-y-0.5 hover:bg-orange-900 focus:outline-none focus:ring-4 focus:ring-orange-300">
+        Play Now
+      </a>
+    </nav>
+  </header>
+
+  <main id="top" class="relative z-10">
+    <section class="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-12 pt-8 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:pb-20 lg:pt-14">
+      <div>
+        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-300 bg-white/75 px-4 py-2 text-sm font-black text-orange-800 shadow-sm backdrop-blur">
+          <span aria-hidden="true">🍊</span>
+          Antoniodevore.com is warming up
+        </div>
+
+        <h1 class="max-w-4xl text-5xl font-black leading-[0.95] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+          Antonio’s bright little corner of the internet is coming soon.
+        </h1>
+
+        <p class="mt-6 max-w-2xl text-lg font-semibold leading-8 text-orange-950/80 sm:text-xl">
+          A fun personal website for games, drawings, stories, experiments, big ideas, little adventures, and whatever awesome thing Antonio dreams up next.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#game" class="rounded-2xl bg-orange-600 px-6 py-4 text-center text-base font-black text-white shadow-2xl shadow-orange-600/30 transition hover:-translate-y-0.5 hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-orange-300">
+            Play while you wait
+          </a>
+          <a href="#about" class="rounded-2xl border-2 border-orange-300 bg-white/75 px-6 py-4 text-center text-base font-black text-orange-950 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:bg-orange-100 focus:outline-none focus:ring-4 focus:ring-orange-300">
+            See what’s coming
+          </a>
+        </div>
+
+        <div class="mt-9 grid max-w-2xl grid-cols-3 gap-3">
+          <div class="rounded-3xl border border-orange-200 bg-white/70 p-4 text-center shadow-sm backdrop-blur">
+            <div class="text-3xl" aria-hidden="true">🎮</div>
+            <p class="mt-2 text-sm font-black text-orange-950">Games</p>
+          </div>
+          <div class="rounded-3xl border border-orange-200 bg-white/70 p-4 text-center shadow-sm backdrop-blur">
+            <div class="text-3xl" aria-hidden="true">🎨</div>
+            <p class="mt-2 text-sm font-black text-orange-950">Art</p>
+          </div>
+          <div class="rounded-3xl border border-orange-200 bg-white/70 p-4 text-center shadow-sm backdrop-blur">
+            <div class="text-3xl" aria-hidden="true">💡</div>
+            <p class="mt-2 text-sm font-black text-orange-950">Ideas</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="relative" aria-label="Website preview card">
+        <div class="absolute -left-5 top-10 hidden h-24 w-24 rounded-[2rem] bg-amber-300 blur-2xl sm:block"></div>
+        <div class="absolute -right-4 bottom-12 hidden h-32 w-32 rounded-full bg-orange-500/40 blur-2xl sm:block"></div>
+
+        <div class="floaty rounded-[2.2rem] border-4 border-white bg-white/80 p-4 shadow-2xl shadow-orange-900/20 backdrop-blur">
+          <div class="rounded-[1.6rem] bg-gradient-to-br from-orange-500 via-amber-400 to-orange-300 p-5 text-white">
+            <div class="flex items-center justify-between">
+              <div class="flex gap-2" aria-hidden="true">
+                <span class="h-3 w-3 rounded-full bg-white/95"></span>
+                <span class="h-3 w-3 rounded-full bg-white/70"></span>
+                <span class="h-3 w-3 rounded-full bg-white/50"></span>
+              </div>
+              <span class="rounded-full bg-white/25 px-3 py-1 text-xs font-black uppercase tracking-widest backdrop-blur">Preview</span>
+            </div>
+
+            <div class="mt-14 rounded-[1.4rem] bg-white/20 p-5 backdrop-blur">
+              <p class="text-sm font-black uppercase tracking-[0.24em] text-white/80">Launch board</p>
+              <h2 class="mt-3 text-4xl font-black leading-none">Fun loading...</h2>
+              <div class="mt-5 grid grid-cols-3 gap-3">
+                <div class="rounded-2xl bg-white/25 p-4 text-center text-3xl">⭐</div>
+                <div class="rounded-2xl bg-white/25 p-4 text-center text-3xl">🍊</div>
+                <div class="rounded-2xl bg-white/25 p-4 text-center text-3xl">🚀</div>
+              </div>
+            </div>
+
+            <div class="mt-5 grid grid-cols-[1fr_auto] gap-3">
+              <div class="rounded-2xl bg-white/25 p-4">
+                <p class="text-xs font-black uppercase tracking-widest text-white/75">Status</p>
+                <p class="mt-1 text-2xl font-black">Almost Ready</p>
+              </div>
+              <div class="grid h-24 w-24 place-items-center rounded-2xl bg-white text-5xl shadow-xl">
+                😎
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="floaty-delay absolute -bottom-8 left-8 hidden rounded-3xl border-4 border-white bg-white p-4 shadow-xl sm:block">
+          <p class="text-sm font-black text-orange-900">Tiny game included</p>
+          <p class="mt-1 text-3xl">🎮🍊</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="game" class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
+      <div class="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div>
+          <p class="text-sm font-black uppercase tracking-[0.28em] text-orange-700">Mini Game</p>
+          <h2 class="mt-2 text-4xl font-black tracking-tight text-ink sm:text-5xl">Antonio’s Orange Rocket Run</h2>
+          <p class="mt-3 max-w-2xl text-base font-semibold leading-7 text-orange-950/75">
+            Collect stars and oranges before time runs out. Dodge the grumpy faces. Works with touch, mouse, keyboard, or the big buttons below.
+          </p>
+        </div>
+
+        <div class="flex gap-3">
+          <button id="startBtn" type="button" class="rounded-2xl bg-ink px-5 py-4 text-sm font-black text-white shadow-lg transition hover:bg-orange-900 focus:outline-none focus:ring-4 focus:ring-orange-300">
+            Start Game
+          </button>
+          <button id="resetBtn" type="button" class="rounded-2xl border-2 border-orange-300 bg-white px-5 py-4 text-sm font-black text-orange-950 shadow-sm transition hover:bg-orange-100 focus:outline-none focus:ring-4 focus:ring-orange-300">
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="grid gap-5 lg:grid-cols-[1fr_320px]">
+        <div class="rounded-[2rem] border-4 border-white bg-white/80 p-3 shadow-2xl shadow-orange-900/15 backdrop-blur">
+          <div class="mb-3 grid grid-cols-3 gap-2 text-center">
+            <div class="rounded-2xl bg-orange-100 px-3 py-3">
+              <p class="text-xs font-black uppercase tracking-widest text-orange-700">Score</p>
+              <p id="scoreText" class="text-2xl font-black text-orange-950">0 / 12</p>
+            </div>
+            <div class="rounded-2xl bg-orange-100 px-3 py-3">
+              <p class="text-xs font-black uppercase tracking-widest text-orange-700">Hearts</p>
+              <p id="livesText" class="text-2xl font-black text-orange-950">❤️❤️❤️</p>
+            </div>
+            <div class="rounded-2xl bg-orange-100 px-3 py-3">
+              <p class="text-xs font-black uppercase tracking-widest text-orange-700">Time</p>
+              <p id="timeText" class="text-2xl font-black text-orange-950">45</p>
+            </div>
+          </div>
+
+          <canvas id="gameCanvas" class="game-canvas" width="800" height="500" aria-label="Antonio's Orange Rocket Run game area"></canvas>
+
+          <p id="gameStatus" class="mt-3 rounded-2xl bg-orange-50 px-4 py-3 text-center text-sm font-black text-orange-900" aria-live="polite">
+            Press Start Game. Collect ⭐ and 🍊. Avoid 😠.
+          </p>
+        </div>
+
+        <aside class="rounded-[2rem] border-4 border-white bg-white/75 p-5 shadow-xl shadow-orange-900/10 backdrop-blur" aria-label="Game controls and instructions">
+          <h3 class="text-2xl font-black text-ink">How to play</h3>
+          <ul class="mt-4 space-y-3 text-sm font-bold leading-6 text-orange-950/80">
+            <li class="flex gap-3"><span aria-hidden="true">⭐</span><span>Stars count as 1 point.</span></li>
+            <li class="flex gap-3"><span aria-hidden="true">🍊</span><span>Oranges count as 2 points.</span></li>
+            <li class="flex gap-3"><span aria-hidden="true">😠</span><span>Grumpy faces take a heart.</span></li>
+            <li class="flex gap-3"><span aria-hidden="true">🏁</span><span>Reach 12 points to win.</span></li>
+          </ul>
+
+          <div class="mt-6 rounded-3xl bg-orange-100 p-4">
+            <p class="text-sm font-black uppercase tracking-widest text-orange-700">Touch Controls</p>
+
+            <div class="mt-4 grid grid-cols-3 gap-3">
+              <span></span>
+              <button class="control-button rounded-2xl bg-white py-4 text-2xl font-black shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-300" data-dir="up" type="button" aria-label="Move up">▲</button>
+              <span></span>
+
+              <button class="control-button rounded-2xl bg-white py-4 text-2xl font-black shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-300" data-dir="left" type="button" aria-label="Move left">◀</button>
+              <button id="boostBtn" class="control-button rounded-2xl bg-orange-600 py-4 text-sm font-black text-white shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-300" type="button" aria-label="Boost speed">BOOST</button>
+              <button class="control-button rounded-2xl bg-white py-4 text-2xl font-black shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-300" data-dir="right" type="button" aria-label="Move right">▶</button>
+
+              <span></span>
+              <button class="control-button rounded-2xl bg-white py-4 text-2xl font-black shadow-sm focus:outline-none focus:ring-4 focus:ring-orange-300" data-dir="down" type="button" aria-label="Move down">▼</button>
+              <span></span>
+            </div>
+
+            <button id="pauseBtn" type="button" class="mt-4 w-full rounded-2xl bg-ink px-5 py-4 text-sm font-black text-white shadow-lg transition hover:bg-orange-900 focus:outline-none focus:ring-4 focus:ring-orange-300">
+              Pause
+            </button>
+          </div>
+
+          <p class="mt-5 text-sm font-semibold leading-6 text-orange-950/70">
+            Tip: On phones and tablets, you can also drag directly inside the game area to guide the rocket.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about" class="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:py-20">
+      <div class="rounded-[2.5rem] border-4 border-white bg-white/75 p-6 shadow-2xl shadow-orange-900/10 backdrop-blur sm:p-8 lg:p-10">
+        <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p class="text-sm font-black uppercase tracking-[0.28em] text-orange-700">What’s coming</p>
+            <h2 class="mt-3 text-4xl font-black tracking-tight text-ink sm:text-5xl">
+              A cheerful homepage for Antonio’s world.
+            </h2>
+            <p class="mt-5 text-lg font-semibold leading-8 text-orange-950/75">
+              The full website will grow into a fun, family-friendly place for creative projects, favorite things, games, photos, drawings, updates, and little digital adventures.
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <article class="rounded-3xl bg-orange-100 p-5">
+              <div class="text-4xl" aria-hidden="true">🧪</div>
+              <h3 class="mt-4 text-xl font-black text-ink">Experiments</h3>
+              <p class="mt-2 text-sm font-bold leading-6 text-orange-950/70">Cool ideas, fun builds, and things Antonio wants to try.</p>
+            </article>
+
+            <article class="rounded-3xl bg-amber-100 p-5">
+              <div class="text-4xl" aria-hidden="true">🕹️</div>
+              <h3 class="mt-4 text-xl font-black text-ink">Games</h3>
+              <p class="mt-2 text-sm font-bold leading-6 text-orange-950/70">Tiny browser games made to play on phones, tablets, and computers.</p>
+            </article>
+
+            <article class="rounded-3xl bg-orange-100 p-5">
+              <div class="text-4xl" aria-hidden="true">📸</div>
+              <h3 class="mt-4 text-xl font-black text-ink">Moments</h3>
+              <p class="mt-2 text-sm font-bold leading-6 text-orange-950/70">A bright spot for favorite memories and milestones.</p>
+            </article>
+
+            <article class="rounded-3xl bg-amber-100 p-5">
+              <div class="text-4xl" aria-hidden="true">🌟</div>
+              <h3 class="mt-4 text-xl font-black text-ink">Big Wins</h3>
+              <p class="mt-2 text-sm font-bold leading-6 text-orange-950/70">A place to celebrate progress, creativity, and new adventures.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="relative z-10 px-5 pb-8 sm:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 rounded-[2rem] border border-orange-200 bg-white/60 px-5 py-5 text-center shadow-sm backdrop-blur sm:flex-row sm:text-left">
+      <p class="text-sm font-black text-orange-950">
+        © <span id="year"></span> Antonio DeVore. Full website coming soon.
+      </p>
+      <a href="#top" class="rounded-full bg-orange-100 px-4 py-3 text-sm font-black text-orange-900 transition hover:bg-orange-200 focus:outline-none focus:ring-4 focus:ring-orange-300">
+        Back to top ↑
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const startBtn = document.getElementById('startBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const pauseBtn = document.getElementById('pauseBtn');
+      const boostBtn = document.getElementById('boostBtn');
+
+      const scoreText = document.getElementById('scoreText');
+      const livesText = document.getElementById('livesText');
+      const timeText = document.getElementById('timeText');
+      const gameStatus = document.getElementById('gameStatus');
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const world = {
+        width: 800,
+        height: 500
+      };
+
+      const state = {
+        started: false,
+        paused: false,
+        over: false,
+        won: false,
+        score: 0,
+        target: 12,
+        lives: 3,
+        time: 45,
+        lastTime: 0,
+        pointerActive: false,
+        pointerTarget: null,
+        buttons: {
+          up: false,
+          down: false,
+          left: false,
+          right: false,
+          boost: false
+        },
+        keys: {},
+        player: {
+          x: 120,
+          y: 250,
+          r: 25,
+          speed: 245,
+          invincible: 0
+        },
+        items: [],
+        enemies: [],
+        particles: [],
+        stars: []
+      };
+
+      const random = (min, max) => Math.random() * (max - min) + min;
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+
+      function safeSpot(radius = 30) {
+        let point = { x: random(60, world.width - 60), y: random(70, world.height - 60), r: radius };
+        let attempts = 0;
+
+        while (distance(point, state.player) < 150 && attempts < 40) {
+          point = { x: random(60, world.width - 60), y: random(70, world.height - 60), r: radius };
+          attempts += 1;
+        }
+
+        return point;
+      }
+
+      function buildBackgroundStars() {
+        state.stars = Array.from({ length: 48 }, () => ({
+          x: random(20, world.width - 20),
+          y: random(20, world.height - 20),
+          r: random(1, 3),
+          alpha: random(0.18, 0.55),
+          drift: random(0.3, 1.4)
+        }));
+      }
+
+      function spawnItem() {
+        const spot = safeSpot(24);
+        const orange = Math.random() > 0.72;
+
+        return {
+          ...spot,
+          kind: orange ? 'orange' : 'star',
+          emoji: orange ? '🍊' : '⭐',
+          points: orange ? 2 : 1,
+          pulse: random(0, Math.PI * 2)
+        };
+      }
+
+      function spawnEnemy(index) {
+        const spot = safeSpot(26);
+        const speed = 72 + index * 18;
+
+        return {
+          ...spot,
+          emoji: '😠',
+          vx: random(-speed, speed) || speed,
+          vy: random(-speed, speed) || speed,
+          r: 25,
+          spin: random(-0.7, 0.7)
+        };
+      }
+
+      function resetGame() {
+        state.started = false;
+        state.paused = false;
+        state.over = false;
+        state.won = false;
+        state.score = 0;
+        state.lives = 3;
+        state.time = 45;
+        state.pointerActive = false;
+        state.pointerTarget = null;
+        state.player.x = 120;
+        state.player.y = 250;
+        state.player.invincible = 0;
+        state.items = Array.from({ length: 8 }, spawnItem);
+        state.enemies = Array.from({ length: 4 }, (_, index) => spawnEnemy(index));
+        state.particles = [];
+        buildBackgroundStars();
+        updateHud('Press Start Game. Collect ⭐ and 🍊. Avoid 😠.');
+        pauseBtn.textContent = 'Pause';
+        startBtn.textContent = 'Start Game';
+      }
+
+      function startGame() {
+        resetGame();
+        state.started = true;
+        state.lastTime = performance.now();
+        startBtn.textContent = 'Restart Game';
+        updateHud('Go! Drag, tap buttons, or use arrow keys to fly.');
+      }
+
+      function togglePause() {
+        if (!state.started || state.over) return;
+
+        state.paused = !state.paused;
+        pauseBtn.textContent = state.paused ? 'Resume' : 'Pause';
+        updateHud(state.paused ? 'Paused. Press Resume when ready.' : 'Back in action!');
+      }
+
+      function updateHud(message) {
+        scoreText.textContent = `${state.score} / ${state.target}`;
+        livesText.textContent = '❤️'.repeat(state.lives) || '💔';
+        timeText.textContent = Math.max(0, Math.ceil(state.time)).toString();
+
+        if (message) {
+          gameStatus.textContent = message;
+        }
+      }
+
+      function addParticles(x, y, emoji, count = 12) {
+        for (let i = 0; i < count; i += 1) {
+          state.particles.push({
+            x,
+            y,
+            emoji,
+            vx: random(-120, 120),
+            vy: random(-150, 70),
+            life: random(0.45, 0.9),
+            maxLife: 0.9,
+            size: random(14, 24)
+          });
+        }
+      }
+
+      function endGame(won) {
+        state.over = true;
+        state.won = won;
+        state.started = false;
+        state.pointerActive = false;
+        startBtn.textContent = 'Play Again';
+
+        if (won) {
+          addParticles(state.player.x, state.player.y, '🎉', 30);
+          updateHud('You won! Antonio’s rocket collected enough sparkle power.');
+        } else {
+          updateHud('Game over! Try again and dodge those grumpy faces.');
+        }
+      }
+
+      function getInputVector() {
+        let dx = 0;
+        let dy = 0;
+
+        if (state.keys.ArrowLeft || state.keys.a || state.buttons.left) dx -= 1;
+        if (state.keys.ArrowRight || state.keys.d || state.buttons.right) dx += 1;
+        if (state.keys.ArrowUp || state.keys.w || state.buttons.up) dy -= 1;
+        if (state.keys.ArrowDown || state.keys.s || state.buttons.down) dy += 1;
+
+        if (state.pointerActive && state.pointerTarget) {
+          const toPointerX = state.pointerTarget.x - state.player.x;
+          const toPointerY = state.pointerTarget.y - state.player.y;
+          const pointerDistance = Math.hypot(toPointerX, toPointerY);
+
+          if (pointerDistance > 12) {
+            dx += toPointerX / pointerDistance;
+            dy += toPointerY / pointerDistance;
+          }
+        }
+
+        const length = Math.hypot(dx, dy);
+        if (length > 0) {
+          dx /= length;
+          dy /= length;
+        }
+
+        return { dx, dy };
+      }
+
+      function updateGame(dt) {
+        if (!state.started || state.paused || state.over) return;
+
+        state.time -= dt;
+        state.player.invincible = Math.max(0, state.player.invincible - dt);
+
+        const { dx, dy } = getInputVector();
+        const boosting = state.keys[' '] || state.buttons.boost;
+        const speed = state.player.speed * (boosting ? 1.55 : 1);
+
+        state.player.x = clamp(state.player.x + dx * speed * dt, state.player.r, world.width - state.player.r);
+        state.player.y = clamp(state.player.y + dy * speed * dt, state.player.r, world.height - state.player.r);
+
+        for (const enemy of state.enemies) {
+          enemy.x += enemy.vx * dt;
+          enemy.y += enemy.vy * dt;
+
+          if (enemy.x < enemy.r || enemy.x > world.width - enemy.r) enemy.vx *= -1;
+          if (enemy.y < enemy.r || enemy.y > world.height - enemy.r) enemy.vy *= -1;
+
+          enemy.x = clamp(enemy.x, enemy.r, world.width - enemy.r);
+          enemy.y = clamp(enemy.y, enemy.r, world.height - enemy.r);
+
+          if (distance(enemy, state.player) < enemy.r + state.player.r - 4 && state.player.invincible <= 0) {
+            state.lives -= 1;
+            state.player.invincible = 1.25;
+            addParticles(state.player.x, state.player.y, '💥', 14);
+
+            const awayX = state.player.x - enemy.x;
+            const awayY = state.player.y - enemy.y;
+            const awayLength = Math.hypot(awayX, awayY) || 1;
+            state.player.x = clamp(state.player.x + (awayX / awayLength) * 55, state.player.r, world.width - state.player.r);
+            state.player.y = clamp(state.player.y + (awayY / awayLength) * 55, state.player.r, world.height - state.player.r);
+
+            if (state.lives <= 0) {
+              endGame(false);
+            } else {
+              updateHud('Ouch! A grumpy face bumped the rocket.');
+            }
+          }
+        }
+
+        for (let i = state.items.length - 1; i >= 0; i -= 1) {
+          const item = state.items[i];
+          item.pulse += dt * 4;
+
+          if (distance(item, state.player) < item.r + state.player.r) {
+            state.score += item.points;
+            addParticles(item.x, item.y, item.kind === 'orange' ? '🍊' : '⭐', 10);
+            state.items.splice(i, 1, spawnItem());
+            updateHud(item.kind === 'orange' ? 'Orange boost! +2 points.' : 'Sparkle collected! +1 point.');
+
+            if (state.score >= state.target) {
+              endGame(true);
+            }
+          }
+        }
+
+        for (let i = state.particles.length - 1; i >= 0; i -= 1) {
+          const p = state.particles[i];
+          p.life -= dt;
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+          p.vy += 220 * dt;
+
+          if (p.life <= 0) {
+            state.particles.splice(i, 1);
+          }
+        }
+
+        if (state.time <= 0 && !state.over) {
+          endGame(false);
+        }
+
+        updateHud();
+      }
+
+      function drawRoundedRect(x, y, width, height, radius) {
+        ctx.beginPath();
+        ctx.roundRect(x, y, width, height, radius);
+        ctx.fill();
+      }
+
+      function drawBackground() {
+        const gradient = ctx.createLinearGradient(0, 0, world.width, world.height);
+        gradient.addColorStop(0, '#fff7ed');
+        gradient.addColorStop(0.45, '#fed7aa');
+        gradient.addColorStop(1, '#fb923c');
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, world.width, world.height);
+
+        ctx.save();
+        ctx.globalAlpha = 0.4;
+        ctx.fillStyle = '#ffffff';
+
+        for (const star of state.stars) {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.globalAlpha = 0.16;
+        ctx.strokeStyle = '#9a3412';
+        ctx.lineWidth = 1;
+
+        for (let x = 0; x < world.width; x += 42) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, world.height);
+          ctx.stroke();
+        }
+
+        for (let y = 0; y < world.height; y += 42) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(world.width, y);
+          ctx.stroke();
+        }
+
+        ctx.restore();
+
+        ctx.save();
+        ctx.globalAlpha = 0.24;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(90, 80, 70, 0, Math.PI * 2);
+        ctx.arc(150, 85, 48, 0, Math.PI * 2);
+        ctx.arc(710, 105, 78, 0, Math.PI * 2);
+        ctx.arc(640, 120, 48, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawEmoji(entity, size, alpha = 1, rotation = 0) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.translate(entity.x, entity.y);
+        ctx.rotate(rotation);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = `${size}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+        ctx.shadowColor = 'rgba(124, 45, 18, 0.22)';
+        ctx.shadowBlur = 12;
+        ctx.shadowOffsetY = 5;
+        ctx.fillText(entity.emoji, 0, 0);
+        ctx.restore();
+      }
+
+      function drawPlayer() {
+        const flicker = state.player.invincible > 0 && Math.floor(performance.now() / 90) % 2 === 0;
+        const alpha = flicker ? 0.45 : 1;
+
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = 'rgba(255,255,255,0.52)';
+        ctx.beginPath();
+        ctx.arc(state.player.x, state.player.y, 34, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        drawEmoji({ ...state.player, emoji: '🚀' }, 42, alpha, -0.18);
+      }
+
+      function drawOverlay(title, body) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(23, 32, 51, 0.62)';
+        ctx.fillRect(0, 0, world.width, world.height);
+
+        ctx.fillStyle = 'rgba(255, 247, 237, 0.96)';
+        drawRoundedRect(80, 105, world.width - 160, 260, 28);
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#172033';
+        ctx.font = '900 42px ui-rounded, system-ui, sans-serif';
+        ctx.fillText(title, world.width / 2, 180);
+
+        ctx.fillStyle = '#9a3412';
+        ctx.font = '800 22px ui-rounded, system-ui, sans-serif';
+        ctx.fillText(body, world.width / 2, 230);
+
+        ctx.fillStyle = '#f97316';
+        ctx.font = '900 52px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
+        ctx.fillText('🚀 ⭐ 🍊', world.width / 2, 300);
+        ctx.restore();
+      }
+
+      function render() {
+        drawBackground();
+
+        for (const item of state.items) {
+          const scale = 1 + Math.sin(item.pulse) * 0.08;
+          drawEmoji(item, item.kind === 'orange' ? 34 * scale : 32 * scale);
+        }
+
+        for (const enemy of state.enemies) {
+          drawEmoji(enemy, 40, 1, Math.sin(performance.now() / 600) * enemy.spin);
+        }
+
+        drawPlayer();
+
+        for (const p of state.particles) {
+          const alpha = clamp(p.life / p.maxLife, 0, 1);
+          drawEmoji(p, p.size, alpha);
+        }
+
+        if (!state.started && !state.over && state.score === 0) {
+          drawOverlay('Ready to launch?', 'Collect 12 points. Dodge the grumps.');
+        }
+
+        if (state.paused) {
+          drawOverlay('Paused', 'Press Resume to keep flying.');
+        }
+
+        if (state.over) {
+          drawOverlay(state.won ? 'You win!' : 'Try again!', state.won ? 'Sparkle power collected.' : 'The rocket needs another run.');
+        }
+      }
+
+      function loop(timestamp) {
+        const rawDelta = (timestamp - state.lastTime) / 1000 || 0;
+        const dt = Math.min(rawDelta, 0.033);
+        state.lastTime = timestamp;
+
+        updateGame(dt);
+        render();
+
+        requestAnimationFrame(loop);
+      }
+
+      function canvasPoint(event) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          x: ((event.clientX - rect.left) / rect.width) * world.width,
+          y: ((event.clientY - rect.top) / rect.height) * world.height
+        };
+      }
+
+      canvas.addEventListener('pointerdown', (event) => {
+        if (!state.started && !state.over) return;
+        canvas.setPointerCapture(event.pointerId);
+        state.pointerActive = true;
+        state.pointerTarget = canvasPoint(event);
+      });
+
+      canvas.addEventListener('pointermove', (event) => {
+        if (!state.pointerActive) return;
+        state.pointerTarget = canvasPoint(event);
+      });
+
+      canvas.addEventListener('pointerup', () => {
+        state.pointerActive = false;
+        state.pointerTarget = null;
+      });
+
+      canvas.addEventListener('pointercancel', () => {
+        state.pointerActive = false;
+        state.pointerTarget = null;
+      });
+
+      document.querySelectorAll('[data-dir]').forEach((button) => {
+        const direction = button.dataset.dir;
+
+        const press = (event) => {
+          event.preventDefault();
+          state.buttons[direction] = true;
+        };
+
+        const release = (event) => {
+          event.preventDefault();
+          state.buttons[direction] = false;
+        };
+
+        button.addEventListener('pointerdown', press);
+        button.addEventListener('pointerup', release);
+        button.addEventListener('pointerleave', release);
+        button.addEventListener('pointercancel', release);
+      });
+
+      boostBtn.addEventListener('pointerdown', (event) => {
+        event.preventDefault();
+        state.buttons.boost = true;
+      });
+
+      boostBtn.addEventListener('pointerup', (event) => {
+        event.preventDefault();
+        state.buttons.boost = false;
+      });
+
+      boostBtn.addEventListener('pointerleave', () => {
+        state.buttons.boost = false;
+      });
+
+      boostBtn.addEventListener('pointercancel', () => {
+        state.buttons.boost = false;
+      });
+
+      window.addEventListener('keydown', (event) => {
+        const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+        state.keys[key] = true;
+
+        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
+          event.preventDefault();
+        }
+
+        if (key === 'p') {
+          togglePause();
+        }
+      });
+
+      window.addEventListener('keyup', (event) => {
+        const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+        state.keys[key] = false;
+      });
+
+      startBtn.addEventListener('click', startGame);
+      resetBtn.addEventListener('click', resetGame);
+      pauseBtn.addEventListener('click', togglePause);
+
+      resetGame();
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
