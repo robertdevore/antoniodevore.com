@@ -1,0 +1,25 @@
+site_url: https://antoniodevore.com
+site_title: Antonio DeVore
+site_tagline: Games, images, writing, and bright experiments.
+
+output: docs
+content: content
+templates: templates
+assets: assets
+
+blog_slug: writing
+posts_at_root: false
+posts_per_page: 12
+sort_by: order
+
+fonts:
+  - Bree Serif
+  - Quicksand
+
+robots: public
+llms: public
+watch: false
+minify: false
+download_remote_images: false
+no_index: false
+no_aux: false
