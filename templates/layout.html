@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="{{lang}}" data-theme="antonio">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{page_title}}</title>
+	<meta name="description" content="{{meta_description}}">
+	<meta name="keywords" content="Antonio DeVore, games, images, writing, AI, creative projects">
+	<meta name="author" content="Antonio DeVore">
+	<meta name="theme-color" content="#fff7ed">
+	{{canonical_tag}}
+	{{favicon_tag}}
+	{{rss_link_tag}}
+	<meta property="og:title" content="{{seo_title}}">
+	<meta property="og:description" content="{{seo_description}}">
+	<meta property="og:url" content="{{og_url}}">
+	<meta property="og:type" content="{{og_type}}">
+	<meta property="og:site_name" content="{{site_title}}">
+	<meta property="og:locale" content="{{og_locale}}">
+	<meta property="og:image" content="https://antoniodevore.com/assets/images/og.png">
+	<meta property="og:image:width" content="1731">
+	<meta property="og:image:height" content="909">
+	<meta property="og:image:alt" content="Antonio DeVore — Games, Images, Writing">
+	{{og_article_tags}}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="{{seo_title}}">
+	<meta name="twitter:description" content="{{seo_description}}">
+	<meta name="twitter:image" content="https://antoniodevore.com/assets/images/og.png">
+	<meta name="twitter:image:alt" content="Antonio DeVore — Games, Images, Writing">
+	<link href="{{relative_path}}assets/css/fonts.css" rel="stylesheet">
+	<link href="{{relative_path}}assets/sitekit/sitekit.css" rel="stylesheet">
+	<link href="{{stylesheet_path}}" rel="stylesheet">
+	{{json_ld}}
+</head>
+<body>
+	<a class="sk-skip-link" href="#main-content">Skip to main content</a>
+	<div class="ad-sun-grid" aria-hidden="true"></div>
+
+	<header class="sk-header ad-header" id="top">
+		<div class="sk-header__inner ad-header__inner">
+			<a class="ad-brand" href="{{home_path}}" aria-label="Antonio DeVore home">
+				<span class="ad-brand__icon" aria-hidden="true">🚀</span>
+				<span class="ad-brand__copy"><strong>Antonio DeVore</strong><small>Making bright things</small></span>
+			</a>
+			<nav class="sk-navigation ad-nav" aria-label="Primary">
+				<a href="{{home_path}}">Home</a>
+				<a href="{{relative_path}}games/">Games</a>
+				<a href="{{relative_path}}images/">Images</a>
+				<a href="{{relative_path}}writing/">Writing</a>
+			</nav>
+			<a class="sk-button ad-header__cta" data-variant="primary" href="{{relative_path}}games/orange-rocket-run/">Play now</a>
+		</div>
+	</header>
+
+	{{content}}
+
+	<footer class="sk-footer ad-footer" id="footer">
+		<div class="sk-footer__inner ad-footer__inner">
+			<div>
+				<p class="ad-footer__brand">🚀 Antonio DeVore</p>
+				<small>Games, images, writing, and bright experiments.</small>
+			</div>
+			<nav aria-label="Footer">
+				<a href="{{relative_path}}games/">Games</a>
+				<a href="{{relative_path}}images/">Images</a>
+				<a href="{{relative_path}}writing/">Writing</a>
+			</nav>
+			<a class="ad-back-top" href="#top">Back to top ↑</a>
+		</div>
+		<p class="ad-footer__legal">© 2026 Antonio DeVore. Built with Kujo SSG + SiteKit.</p>
+	</footer>
+
+	<script src="{{relative_path}}assets/sitekit/sitekit.js" defer></script>
+	<script src="{{relative_path}}assets/js/site.js" defer></script>
+	<script src="{{relative_path}}assets/js/rocket-run.js" defer></script>
+</body>
+</html>

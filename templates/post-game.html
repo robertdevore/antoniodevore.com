@@ -1,0 +1,22 @@
+<main class="ad-article" id="main-content">
+	<article class="ad-shell ad-article__panel">
+		<p class="ad-eyebrow">Playable game</p>
+		<h1>{{title}}</h1>
+		<p class="ad-article__meta"><span>{{date}}</span> · <span>{{author}}</span></p>
+		<div class="ad-prose">{{body}}</div>
+		<div class="ad-game-layout ad-game-layout--detail">
+			<div class="sk-card ad-game-card">
+				<div class="ad-scoreboard"><div><small>Score</small><strong id="scoreText">0 / 12</strong></div><div><small>Hearts</small><strong id="livesText">❤️❤️❤️</strong></div><div><small>Time</small><strong id="timeText">45</strong></div></div>
+				<canvas class="ad-game-canvas" id="gameCanvas" width="800" height="500" aria-label="Antonio's Orange Rocket Run game area"></canvas>
+				<p class="ad-game-status" id="gameStatus" aria-live="polite">Press Start Game. Collect ⭐ and 🍊. Avoid 😠.</p>
+			</div>
+			<aside class="sk-card ad-controls" aria-label="Game controls">
+				<div class="ad-actions"><button class="sk-button" data-variant="primary" id="startBtn" type="button">Start game</button><button class="sk-button" data-variant="secondary" id="resetBtn" type="button">Reset</button></div>
+				<h2>Touch controls</h2>
+				<div class="ad-direction-pad"><span></span><button data-dir="up" type="button" aria-label="Move up">▲</button><span></span><button data-dir="left" type="button" aria-label="Move left">◀</button><button class="ad-boost" id="boostBtn" type="button" aria-label="Boost speed">Boost</button><button data-dir="right" type="button" aria-label="Move right">▶</button><span></span><button data-dir="down" type="button" aria-label="Move down">▼</button><span></span></div>
+				<button class="sk-button ad-pause" data-variant="primary" id="pauseBtn" type="button">Pause</button>
+			</aside>
+		</div>
+		<p class="ad-article__back"><a href="../">← Back to all games</a></p>
+	</article>
+</main>
