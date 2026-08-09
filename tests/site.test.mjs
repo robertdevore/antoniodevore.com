@@ -46,3 +46,14 @@ test('theme removes blueprint accents and provides an accessible mobile menu', a
   assert.match(styles, /\.sk-card::before,[\s\S]*\.sk-card::after \{ content: none; \}/);
   assert.match(styles, /--ad-font-display:/);
 });
+
+test('display typography replaces Departure Mono and reveal effects fail open', async () => {
+  const styles = await read('docs/assets/css/style.css');
+  const script = await read('docs/assets/js/site.js');
+  assert.match(styles, /--sk-font-mono: var\(--ad-font-display\)/);
+  assert.match(styles, /\[data-reveal\] \{ opacity: 1; transform: none; \}/);
+  assert.match(styles, /\.ad-reveal-enabled \[data-reveal\]:not\(\.is-visible\)/);
+  assert.match(script, /desktopQuery\.addListener\(closeMenu\)/);
+  assert.match(script, /document\.documentElement\.classList\.add\('ad-reveal-enabled'\)/);
+  assert.match(script, /catch \{/);
+});
