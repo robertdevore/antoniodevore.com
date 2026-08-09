@@ -57,3 +57,19 @@ test('display typography replaces Departure Mono and reveal effects fail open', 
   assert.match(script, /document\.documentElement\.classList\.add\('ad-reveal-enabled'\)/);
   assert.match(script, /catch \{/);
 });
+
+test('header is a full-width sticky bar without a square inner frame', async () => {
+  const html = await read('docs/index.html');
+  const styles = await read('docs/assets/css/style.css');
+  assert.match(html, /assets\/css\/style\.css\?v=20260809-4/);
+  assert.match(html, /assets\/js\/site\.js\?v=20260809-4/);
+  assert.match(styles, /\.ad-header \{[\s\S]*position: sticky;[\s\S]*inset-block-start: 0;[\s\S]*background: var\(--ad-white\)/);
+  assert.match(styles, /\.ad-header__inner \{[\s\S]*border: 0 !important;[\s\S]*border-radius: var\(--ad-radius-lg\)/);
+});
+
+test('footer credits link to the Kujo ecosystem below the main footer panel', async () => {
+  const html = await read('docs/index.html');
+  const styles = await read('docs/assets/css/style.css');
+  assert.match(html, /class="ad-footer__legal">© 2026 Antonio DeVore\. Built with <a href="https:\/\/kujolang\.ai\/ecosystem\/">Kujo SSG<\/a> \+ <a href="https:\/\/kujolang\.ai\/ecosystem\/">SiteKit<\/a>\.<\/p>/);
+  assert.match(styles, /\.ad-footer \.ad-footer__legal \{[^}]*margin: 1\.5rem auto 0;/);
+});
