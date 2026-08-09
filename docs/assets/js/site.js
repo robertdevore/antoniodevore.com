@@ -18,7 +18,7 @@
     });
 
     navigation.addEventListener('click', (event) => {
-      if (event.target.closest('a')) closeMenu();
+      if (event.target instanceof Element && event.target.closest('a')) closeMenu();
     });
 
     document.addEventListener('click', (event) => {
@@ -34,24 +34,42 @@
       }
     });
 
-    window.matchMedia('(min-width: 48.0625rem)').addEventListener('change', closeMenu);
+    const desktopQuery = window.matchMedia('(min-width: 48.0625rem)');
+    if (typeof desktopQuery.addEventListener === 'function') {
+      desktopQuery.addEventListener('change', closeMenu);
+    } else if (typeof desktopQuery.addListener === 'function') {
+      desktopQuery.addListener(closeMenu);
+    }
   }
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealItems = document.querySelectorAll('[data-reveal]');
 
-  if (reducedMotion || !('IntersectionObserver' in window)) {
+  if (reducedMotion || !('IntersectionObserver' in window) || revealItems.length === 0) {
     revealItems.forEach((item) => item.classList.add('is-visible'));
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  try {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
-  revealItems.forEach((item) => observer.observe(item));
+    const visibleBoundary = window.innerHeight * 0.92;
+    revealItems.forEach((item) => {
+      const bounds = item.getBoundingClientRect();
+      if (bounds.top < visibleBoundary && bounds.bottom > 0) {
+        item.classList.add('is-visible');
+      } else {
+        observer.observe(item);
+      }
+    });
+    document.documentElement.classList.add('ad-reveal-enabled');
+  } catch {
+    revealItems.forEach((item) => item.classList.add('is-visible'));
+  }
 })();
