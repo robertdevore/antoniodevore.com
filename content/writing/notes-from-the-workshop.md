@@ -8,7 +8,7 @@ date: 2026-08-09
 template: writing
 order: 1
 excerpt: This notebook is ready for build notes, curious questions, and ideas worth sharing.
-tags: [welcome, making]
+tags: [Welcome, Making]
 ---
 
 This notebook is ready for the stories behind the projects: what worked, what surprised Antonio, what he learned, and what he wants to try next.

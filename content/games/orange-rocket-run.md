@@ -8,7 +8,7 @@ date: 2026-08-09
 template: game
 order: 1
 excerpt: A fast, colorful browser game with touch, mouse, and keyboard controls.
-tags: [browser-game, orange-rocket]
+tags: [Browser game, Orange Rocket]
 ---
 
 Collect stars and oranges before time runs out. Dodge the grumpy faces, keep your three hearts, and reach 12 points to win.

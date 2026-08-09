@@ -8,7 +8,7 @@ date: 2026-08-09
 template: image
 order: 1
 excerpt: The gallery framework is ready. Antonio’s first full collections are coming next.
-tags: [gallery, images]
+tags: [Gallery, Images]
 ---
 
 This is the beginning of a gallery built to grow. Each collection can hold a different style, story, or visual experiment while still feeling like part of Antonio’s bright world.

@@ -10,7 +10,11 @@ test('homepage keeps the Antonio identity and primary content routes', async () 
   assert.match(html, /href="games\//);
   assert.match(html, /href="images\//);
   assert.match(html, /href="writing\//);
-  assert.match(html, /id="gameCanvas"/);
+  assert.match(html, /href="games\/orange-rocket-run\/"/);
+  assert.doesNotMatch(html, /Antoniodevore\.com is ready to play/);
+  assert.doesNotMatch(html, /id="gameCanvas"/);
+  assert.doesNotMatch(html, /ad-game-section/);
+  assert.doesNotMatch(html, /assets\/js\/rocket-run\.js/);
   assert.match(html, /assets\/sitekit\/sitekit\.css/);
 });
 
@@ -61,15 +65,32 @@ test('display typography replaces Departure Mono and reveal effects fail open', 
 test('header is a full-width sticky bar without a square inner frame', async () => {
   const html = await read('docs/index.html');
   const styles = await read('docs/assets/css/style.css');
-  assert.match(html, /assets\/css\/style\.css\?v=20260809-4/);
-  assert.match(html, /assets\/js\/site\.js\?v=20260809-4/);
+  assert.match(html, /assets\/css\/style\.css\?v=20260809-5/);
+  assert.match(html, /assets\/js\/site\.js\?v=20260809-5/);
   assert.match(styles, /\.ad-header \{[\s\S]*position: sticky;[\s\S]*inset-block-start: 0;[\s\S]*background: var\(--ad-white\)/);
   assert.match(styles, /\.ad-header__inner \{[\s\S]*border: 0 !important;[\s\S]*border-radius: var\(--ad-radius-lg\)/);
+  assert.match(styles, /\.ad-header__cta:hover \{[^}]*background: var\(--ad-orange-600\) !important;[^}]*color: var\(--ad-white\) !important;/);
 });
 
 test('footer credits link to the Kujo ecosystem below the main footer panel', async () => {
   const html = await read('docs/index.html');
   const styles = await read('docs/assets/css/style.css');
-  assert.match(html, /class="ad-footer__legal">© 2026 Antonio DeVore\. Built with <a href="https:\/\/kujolang\.ai\/ecosystem\/">Kujo SSG<\/a> \+ <a href="https:\/\/kujolang\.ai\/ecosystem\/">SiteKit<\/a>\.<\/p>/);
+  assert.match(html, /class="ad-footer__legal">© 2026 Antonio DeVore\. Built with <a href="https:\/\/kujolang\.ai\/ecosystem\/ssg\/">SSG<\/a> \+ <a href="https:\/\/kujolang\.ai\/ecosystem\/sitekit\/">SiteKit<\/a>\.<\/p>/);
   assert.match(styles, /\.ad-footer \.ad-footer__legal \{[^}]*margin: 1\.5rem auto 0;/);
+});
+
+test('game assets stay on the game post and collection tags are readable', async () => {
+  const gameHtml = await read('docs/games/orange-rocket-run/index.html');
+  const listingHtml = await read('docs/games/index.html');
+  const styles = await read('docs/assets/css/style.css');
+  assert.match(gameHtml, /assets\/js\/rocket-run\.js\?v=20260809-5/);
+  assert.match(listingHtml, /<span class="tag listing-tag">Browser game<\/span><span class="tag listing-tag">Orange Rocket<\/span>/);
+  assert.match(styles, /\.listing-card-tags \{[^}]*display: flex;[^}]*gap: var\(--sk-space-2\);/);
+  assert.match(styles, /\.listing-tag \{[^}]*border-radius: var\(--ad-radius-pill\);/);
+});
+
+test('home hero has no border and links never regain underlines', async () => {
+  const styles = await read('docs/assets/css/style.css');
+  assert.match(styles, /\.ad-hero \{[^}]*border: 0;/);
+  assert.match(styles, /a, a:hover, a:focus, a:active \{ text-decoration: none; \}/);
 });
