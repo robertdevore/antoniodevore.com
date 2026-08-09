@@ -12,10 +12,6 @@ posts_at_root: false
 posts_per_page: 12
 sort_by: order
 
-fonts:
-  - Bree Serif
-  - Quicksand
-
 robots: public
 llms: public
 watch: false

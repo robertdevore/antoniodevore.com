@@ -16,8 +16,8 @@
     --ad-white: #ffffff;
     --ad-white-75: rgb(255 255 255 / 0.78);
     --ad-orange-shadow: rgb(154 52 18 / 0.16);
-    --ad-orange-grid: rgb(255 122 24 / 0.12);
     --ad-focus: #c2410c;
+    --ad-font-display: "Arial Rounded MT Bold", "Trebuchet MS", ui-rounded, system-ui, sans-serif;
     --ad-radius-pill: 999px;
     --ad-radius-sm: 1rem;
     --ad-radius-md: 1.5rem;
@@ -27,8 +27,8 @@
     --ad-shadow-md: 0 1rem 2.4rem rgb(154 52 18 / 0.14);
     --ad-shadow-lg: 0 1.5rem 4rem rgb(154 52 18 / 0.2);
 
-    --sk-font-sans: "Quicksand", ui-rounded, system-ui, sans-serif;
-    --sk-font-mono: "Bree Serif", ui-rounded, Georgia, serif;
+    --sk-font-sans: ui-rounded, "Avenir Next", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --sk-font-mono: "Departure Mono", "SFMono-Regular", Consolas, monospace;
     --sk-surface-page: var(--ad-orange-50);
     --sk-surface-raised: var(--ad-white);
     --sk-surface-card: var(--ad-white-75);
@@ -82,7 +82,7 @@
 
   h1, h2, h3, h4 {
     color: var(--ad-ink);
-    font-family: var(--sk-font-sans);
+    font-family: var(--ad-font-display);
     font-weight: 800;
     letter-spacing: -0.035em;
   }
@@ -93,19 +93,6 @@
 }
 
 @layer components {
-  .ad-sun-grid {
-    position: fixed;
-    z-index: -1;
-    inset: 0;
-    opacity: 0.72;
-    pointer-events: none;
-    background-image:
-      linear-gradient(var(--ad-orange-grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--ad-orange-grid) 1px, transparent 1px);
-    background-size: 34px 34px;
-    mask-image: linear-gradient(to bottom, black, transparent 85%);
-  }
-
   .ad-shell {
     width: min(100% - 2rem, 78rem);
     margin-inline: auto;
@@ -185,6 +172,28 @@
   }
 
   .ad-nav a:hover { background: var(--ad-orange-100); }
+
+  .ad-nav__play,
+  .ad-menu-toggle { display: none; }
+
+  .ad-menu-toggle {
+    align-items: center;
+    justify-content: center;
+    gap: var(--sk-space-2);
+    min-block-size: 3rem;
+    padding: 0.7rem 1rem;
+    border: var(--sk-border-2) solid var(--ad-orange-300);
+    border-radius: var(--ad-radius-pill);
+    background: var(--ad-white-75);
+    color: var(--ad-orange-800);
+    box-shadow: var(--ad-shadow-sm);
+    cursor: pointer;
+  }
+
+  .ad-menu-toggle__icon { inline-size: 1.4rem; block-size: 1.4rem; }
+
+  .sk-card::before,
+  .sk-card::after { content: none; }
 
   .sk-button {
     min-block-size: 3rem;
@@ -383,12 +392,40 @@
   .ad-feature-grid, .ad-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+@media (max-width: 48rem) {
+  .ad-header__inner { position: relative; flex-wrap: nowrap; }
+  .ad-menu-toggle { display: inline-flex; margin-inline-start: auto; }
+  .ad-header__cta { display: none; }
+  .ad-nav {
+    position: absolute;
+    z-index: 30;
+    inset-block-start: calc(100% - var(--sk-space-2));
+    inset-inline: var(--sk-space-4);
+    display: grid;
+    order: initial;
+    width: auto;
+    justify-content: stretch;
+    gap: var(--sk-space-2);
+    padding: var(--sk-space-3);
+    border-radius: var(--ad-radius-lg);
+    background: rgb(255 255 255 / 0.96);
+    box-shadow: var(--ad-shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.75rem) scale(0.98);
+    transform-origin: top right;
+    pointer-events: none;
+    overflow: visible;
+    transition: opacity var(--sk-motion-base) var(--sk-motion-ease), transform var(--sk-motion-base) var(--sk-motion-ease), visibility var(--sk-motion-base) var(--sk-motion-ease);
+  }
+  .ad-nav a { width: 100%; padding: 0.9rem 1rem; }
+  .ad-nav__play { display: block; background: var(--ad-orange-600); color: var(--ad-white) !important; }
+  .ad-nav.is-open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); pointer-events: auto; }
+}
+
 @media (max-width: 42rem) {
   .ad-shell { width: min(100% - 1.25rem, 78rem); }
   .ad-brand__copy small { display: none; }
-  .ad-header__cta { display: none; }
-  .ad-nav { justify-content: flex-start; }
-  .ad-nav a { flex: 0 0 auto; }
   .ad-hero { padding-block-start: 1.5rem; }
   .ad-hero h1 { font-size: clamp(3rem, 15vw, 4.25rem); }
   .ad-actions { display: grid; grid-template-columns: 1fr; width: 100%; }
@@ -412,3 +449,6 @@
   .ad-launch-card { animation: none; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
 }
+
+/* Keep the display face independent of generated font helpers. */
+h1, h2, h3, h4, h5, h6, .title-font { font-family: var(--ad-font-display); }

@@ -35,3 +35,14 @@ test('GitHub Pages metadata is generated', async () => {
   assert.equal((await read('docs/CNAME')).trim(), 'antoniodevore.com');
   assert.ok((await stat('docs/.nojekyll')).isFile());
 });
+
+test('theme removes blueprint accents and provides an accessible mobile menu', async () => {
+  const html = await read('docs/index.html');
+  const styles = await read('docs/assets/css/style.css');
+  assert.doesNotMatch(html, /ad-sun-grid/);
+  assert.match(html, /class="ad-menu-toggle"/);
+  assert.match(html, /icon-tabler-menu-2/);
+  assert.match(html, /aria-controls="primary-navigation"/);
+  assert.match(styles, /\.sk-card::before,[\s\S]*\.sk-card::after \{ content: none; \}/);
+  assert.match(styles, /--ad-font-display:/);
+});
