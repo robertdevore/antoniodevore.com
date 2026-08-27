@@ -40,6 +40,18 @@ test('GitHub Pages metadata is generated', async () => {
   assert.ok((await stat('docs/.nojekyll')).isFile());
 });
 
+test('WebMCP discovery exposes the read-only site contract', async () => {
+  const index = JSON.parse(await read('docs/.well-known/kujo-site-index.json'));
+  const homepage = await read('docs/index.html');
+  const runtime = await read('docs/assets/js/kujo-webmcp.js');
+  assert.equal(index.schema, 'kujo-ssg-site-index/v1');
+  assert.equal(index.site.url, 'https://antoniodevore.com');
+  assert.ok(index.items.length > 0);
+  assert.deepEqual(['get_site_info', 'search_site', 'list_content', 'get_content'].sort(),
+    [...runtime.matchAll(/name:'([^']+)'/g)].map((match) => match[1]).sort());
+  assert.equal((homepage.match(/data-kujo-webmcp/g) || []).length, 1);
+});
+
 test('theme removes blueprint accents and provides an accessible mobile menu', async () => {
   const html = await read('docs/index.html');
   const styles = await read('docs/assets/css/style.css');

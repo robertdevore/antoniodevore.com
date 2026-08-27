@@ -1,0 +1,109 @@
+{
+  "schema": "kujo-ssg-site-index/v1",
+  "generated_by": {
+    "name": "kujo-ssg",
+    "version": "1.0.1"
+  },
+  "site": {
+    "title": "Antonio DeVore",
+    "tagline": "Games, images, writing, and bright experiments.",
+    "url": "https://antoniodevore.com",
+    "base_path": "/",
+    "language": "en"
+  },
+  "navigation": [],
+  "content_types": [
+    {
+      "name": "pages",
+      "title": "Pages",
+      "count": 7,
+      "taxonomies": []
+    }
+  ],
+  "items": [
+    {
+      "id": "page:/",
+      "type": "pages",
+      "slug": "home",
+      "url": "https://antoniodevore.com/",
+      "title": "Antonio DeVore",
+      "description": "Games, images, writing, and bright experiments.",
+      "summary": "Games, images, writing, and bright experiments.",
+      "language": "en",
+      "searchable": true,
+      "taxonomies": {}
+    },
+    {
+      "id": "page:/games/",
+      "type": "pages",
+      "slug": "games",
+      "url": "https://antoniodevore.com/games/",
+      "title": "/games/",
+      "description": "",
+      "summary": "",
+      "language": "en",
+      "searchable": true,
+      "taxonomies": {}
+    },
+    {
+      "id": "page:/games/orange-rocket-run/",
+      "type": "pages",
+      "slug": "games-orange-rocket-run",
+      "url": "https://antoniodevore.com/games/orange-rocket-run/",
+      "title": "/games/orange-rocket-run/",
+      "description": "",
+      "summary": "",
+      "language": "en",
+      "searchable": true,
+      "taxonomies": {}
+    },
+    {
+      "id": "page:/images/",
+      "type": "pages",
+      "slug": "images",
+      "url": "https://antoniodevore.com/images/",
+      "title": "/images/",
+      "description": "",
+      "summary": "",
+      "language": "en",
+      "searchable": true,
+      "taxonomies": {}
+    },
+    {
+      "id": "page:/images/gallery-doors-opening/",
+      "type": "pages",
+      "slug": "images-gallery-doors-opening",
+      "url": "https://antoniodevore.com/images/gallery-doors-opening/",
+      "title": "/images/gallery-doors-opening/",
+      "description": "",
+      "summary": "",
+      "language": "en",
+      "searchable": true,
+      "taxonomies": {}
+    },
+    {
+      "id": "page:/writing/",
+      "type": "pages",
+      "slug": "writing",
+      "url": "https://antoniodevore.com/writing/",
+      "title": "/writing/",
+      "description": "",
+      "summary": "",
+      "language": "en",
+      "searchable": true,
+      "taxonomies": {}
+    },
+    {
+      "id": "page:/writing/notes-from-the-workshop/",
+      "type": "pages",
+      "slug": "writing-notes-from-the-workshop",
+      "url": "https://antoniodevore.com/writing/notes-from-the-workshop/",
+      "title": "/writing/notes-from-the-workshop/",
+      "description": "",
+      "summary": "",
+      "language": "en",
+      "searchable": true,
+      "taxonomies": {}
+    }
+  ]
+}
