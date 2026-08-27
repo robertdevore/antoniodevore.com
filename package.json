@@ -2,11 +2,16 @@
   "name": "antoniodevore-com",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/tailwind.css --minify",
-    "watch:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/tailwind.css --watch"
+  "engines": {
+    "node": ">=22.13.0"
   },
-  "devDependencies": {
-    "tailwindcss": "^3.4.17"
-  }
+  "scripts": {
+    "dev": "kujo run ./build.kujo -- --site-url http://localhost:3000 && node scripts/finalize-pages.mjs && kujo serve docs --port 3000",
+    "build:ssg": "kujo run ./build.kujo -- --site-url https://antoniodevore.com",
+    "build": "npm run build:ssg && node scripts/finalize-pages.mjs",
+    "start": "kujo serve docs --port 3000",
+    "lint": "node --check assets/js/site.js && node --check assets/js/rocket-run.js && node --check scripts/finalize-pages.mjs",
+    "test": "npm run build && node --test tests/site.test.mjs"
+  },
+  "type": "module"
 }
